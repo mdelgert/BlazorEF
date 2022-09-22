@@ -9,7 +9,7 @@ public class NoteServiceTests
 {
     private readonly ITestOutputHelper _testOutputHelper;
     private readonly INoteService _noteService;
-    private const int BatchSize = 10;
+    private const int BatchSize = 100;
 
     public NoteServiceTests(ITestOutputHelper testOutputHelper, INoteService noteService)
     {
