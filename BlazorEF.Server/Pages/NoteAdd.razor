@@ -1,6 +1,5 @@
 ﻿@page "/note/add"
 @page "/note/edit"
-@*@page "/note/edit/{noteId:string}"*@
 @using BlazorEF.Shared.Services
 @using BlazorEF.Shared.Models
 @inject INoteService NoteService
@@ -13,14 +12,14 @@
     <DataAnnotationsValidator/>
     <div class="mb-3">
         <label for="Title" class="form-label">Title</label>
-        <div class="col-md-4">
+        <div class="col-md-4" id="Title">
             <InputText class="form-control" @bind-Value="_note.Title"/>
         </div>
         <ValidationMessage For="@(() => _note.Title)"/>
     </div>
     <div class="mb-3">
         <label for="Message" class="form-label">Message</label>
-        <div class="col-md-4">
+        <div class="col-md-4" id="Message">
             <InputText class="form-control" @bind-Value="_note.Message"/>
         </div>
         <ValidationMessage For="@(() => _note.Message)"/>
@@ -32,23 +31,21 @@
 </EditForm>
 
 @code {
-    // [Parameter]
-    // public string NoteId { get; set; }
-    string NoteId;
-    
+    string _noteId;
     private NoteModel _note = new();
     private const string Title = "Add";
 
-    protected override async Task OnInitializedAsync()
+    protected override Task OnInitializedAsync()
     {
-        NavigationManager.TryGetQueryString<string>("noteId", out NoteId);
+        NavigationManager.TryGetQueryString<string>("noteId", out _noteId);
+        return Task.CompletedTask;
     }
     
     protected override async Task OnParametersSetAsync()
     {
-        if (NoteId != null)
+        if (_noteId != null)
         {
-            _note = await NoteService.FindById(NoteId);
+            _note = await NoteService.FindById(_noteId);
         }
     }
 

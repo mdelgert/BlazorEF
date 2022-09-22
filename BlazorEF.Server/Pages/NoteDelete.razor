@@ -1,5 +1,4 @@
-﻿@*@page "/note/delete/{noteId:string}"*@
-@page "/note/delete"
+﻿@page "/note/delete"
 @using BlazorEF.Shared.Services
 @using BlazorEF.Shared.Models
 @inject INoteService NoteService
@@ -14,34 +13,31 @@
         <tbody>
             <tr>
                 <td>Title</td>
-                <td>@note.Title</td>
+                <td>@_note.Title</td>
             </tr>
             <tr>
                 <td>Message</td>
-                <td>@note.Message</td>
+                <td>@_note.Message</td>
             </tr>
         </tbody>
     </table>
 </div>
 <div class="form-group">
-    <input type="submit" value="Delete" @onclick="(async () => await RemoveNote(note.NoteId))" class="btn btn-danger" />
-    <input type="submit" value="Cancel" @onclick="(() => Cancel())" class="btn btn-warning" />
+    <input type="submit" value="Delete" @onclick="(async () => await RemoveNote(_note.NoteId))" class="btn btn-danger" />
+    <input type="submit" value="Cancel" @onclick="(Cancel)" class="btn btn-warning" />
 </div>
 
 @code {
-    // [Parameter]
-    // public string noteId { get; set; }
-    
-    string noteId;
-    NoteModel note = new NoteModel();
+    string _noteId;
+    NoteModel _note = new NoteModel();
     
     protected override async Task OnInitializedAsync()
     {
-        NavigationManager.TryGetQueryString<string>("noteId", out noteId);
-        note = await NoteService.FindById(noteId);
+        NavigationManager.TryGetQueryString<string>("noteId", out _noteId);
+        _note = await NoteService.FindById(_noteId);
     }
 
-    protected async Task RemoveNote(string noteId)
+    private async Task RemoveNote(string noteId)
     {
         await NoteService.Delete(noteId);
         NavigationManager.NavigateTo("/notelist");

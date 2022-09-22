@@ -28,7 +28,7 @@
 </div>
 <br />
 
-@if (noteList == null)
+@if (_noteList == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -44,7 +44,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var note in noteList)
+            @foreach (var note in _noteList)
             {
                 <tr>
                     <td>@note.NoteId</td>
@@ -61,44 +61,38 @@ else
 }
 
 @code {
-    protected List<NoteModel> noteList = new();
-    protected List<NoteModel> searchNoteData = new();
-    protected NoteModel note = new();
-    protected string SearchString { get; set; } = string.Empty;
+    private List<NoteModel> _noteList = new();
+    private List<NoteModel> _searchNoteData = new();
+    private string SearchString { get; set; } = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
         await GetNotes();
     }
 
-    protected async Task GetNotes()
+    private async Task GetNotes()
     {
-        noteList = await NoteService.ReadAll();
-        searchNoteData = noteList;
+        _noteList = await NoteService.ReadAll();
+        _searchNoteData = _noteList;
     }
 
-    protected void FilterNote()
+    private void FilterNote()
     {
         if (!string.IsNullOrEmpty(SearchString))
         {
-            noteList = searchNoteData
-                .Where(x => x.Title.IndexOf(SearchString, StringComparison.OrdinalIgnoreCase) != -1)
+            _noteList = _searchNoteData
+                .Where(x => x.Title != null && x.Title.IndexOf(SearchString, StringComparison.OrdinalIgnoreCase) != -1)
                 .ToList();
         }
         else
         {
-            noteList = searchNoteData;
+            _noteList = _searchNoteData;
         }
     }
 
-    protected void DeleteConfirm(string noteID)
-    {
-        note = noteList.FirstOrDefault(x => x.NoteId == noteID);
-    }
-
-    public void ResetSearch()
+    private void ResetSearch()
     {
         SearchString = string.Empty;
-        noteList = searchNoteData;
+        _noteList = _searchNoteData;
     }
 }
