@@ -14,3 +14,13 @@ PM> Install-Package Serilog.Extensions.Logging.File
 ```console
 PM> Install-Package Microsoft.Extensions.Logging.Console
 ```
+
+[Bogus](https://www.nuget.org/packages/Bogus)
+```console
+PM> Install-Package Bogus
+```
+
+[RandomDataGenerator.Net](https://www.nuget.org/packages/RandomDataGenerator.Net)
+```console
+PM> Install-Package RandomDataGenerator.Net
+```
