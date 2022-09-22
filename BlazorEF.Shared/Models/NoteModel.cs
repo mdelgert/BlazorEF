@@ -1,8 +1,11 @@
-﻿namespace BlazorEF.Shared.Models;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BlazorEF.Shared.Models;
 
 public class NoteModel
 {
-    public int Id { get; set; }
+    [Key]
+    public string NoteId { get; set; }
     public string? Title { get; set; }
     public string? Message { get; set; }
 }

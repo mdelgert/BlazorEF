@@ -1,5 +1,6 @@
 ﻿@page "/note/add"
-@page "/note/edit/{noteId:int}"
+@page "/note/edit"
+@*@page "/note/edit/{noteId:string}"*@
 @using BlazorEF.Shared.Services
 @using BlazorEF.Shared.Models
 @inject INoteService NoteService
@@ -31,14 +32,21 @@
 </EditForm>
 
 @code {
-    [Parameter]
-    public int NoteId { get; set; }
+    // [Parameter]
+    // public string NoteId { get; set; }
+    string NoteId;
+    
     private NoteModel _note = new();
     private const string Title = "Add";
 
+    protected override async Task OnInitializedAsync()
+    {
+        NavigationManager.TryGetQueryString<string>("noteId", out NoteId);
+    }
+    
     protected override async Task OnParametersSetAsync()
     {
-        if (NoteId != 0)
+        if (NoteId != null)
         {
             _note = await NoteService.FindById(NoteId);
         }
@@ -46,14 +54,14 @@
 
     private async Task SaveNote()
     {
-        if (_note != null && _note.Id != 0)
-        {
-            await NoteService.Update(_note);
-        }
-        else
-        {
-            if (_note != null) await NoteService.Create(_note);
-        }
+         if (_note != null && _note.NoteId != null)
+         {
+             await NoteService.Update(_note);
+         }
+         else
+         {
+             if (_note != null) await NoteService.Create(_note);
+         }
         Cancel();
     }
 

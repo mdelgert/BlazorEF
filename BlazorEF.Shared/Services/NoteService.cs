@@ -5,11 +5,11 @@ namespace BlazorEF.Shared.Services;
 
 public interface INoteService
 {
-    Task<int> Create(NoteModel note);
-    Task<NoteModel> FindById(int id);
+    Task<NoteModel> Create(NoteModel note);
+    Task<NoteModel> FindById(string id);
     Task<List<NoteModel>> ReadAll();
-    Task Update(NoteModel note);
-    Task Delete(int id);
+    Task<NoteModel> Update(NoteModel note);
+    Task Delete(string id);
 }
 
 public class NoteService : INoteService
@@ -21,14 +21,15 @@ public class NoteService : INoteService
         _dbContext = dbContext;
     }
 
-    public async Task<int> Create(NoteModel note)
+    public async Task<NoteModel> Create(NoteModel note)
     {
-        _dbContext.Notes.Add(note);
-        var id = await _dbContext.SaveChangesAsync();
-        return id;
+        note.NoteId = Guid.NewGuid().ToString();
+        var id = _dbContext.Notes.Add(note);
+        await _dbContext.SaveChangesAsync();
+        return note;
     }
 
-    public async Task<NoteModel> FindById(int id)
+    public async Task<NoteModel> FindById(string id)
     {
         var note = await _dbContext.Notes.FindAsync(id);
         return note;
@@ -40,13 +41,14 @@ public class NoteService : INoteService
         return Task.FromResult(notes);
     }
 
-    public async Task Update(NoteModel note)
+    public async Task<NoteModel> Update(NoteModel note)
     {
         _dbContext.Entry(note).State = EntityState.Modified;
         await _dbContext.SaveChangesAsync();
+        return note;
     }
 
-    public async Task Delete(int id)
+    public async Task Delete(string id)
     {
         var note = await _dbContext.Notes.FindAsync(id);
         if (note != null) _dbContext.Notes.Remove(note);

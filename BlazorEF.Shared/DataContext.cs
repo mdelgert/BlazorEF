@@ -10,7 +10,7 @@ public class DataContext: DbContext
     public DataContext()
     {
         //Database.EnsureDeleted();
-        Database.EnsureCreated();
+        //Database.EnsureCreated();
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

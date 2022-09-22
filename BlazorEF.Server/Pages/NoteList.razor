@@ -47,16 +47,12 @@ else
             @foreach (var note in noteList)
             {
                 <tr>
-                    <td>@note.Id</td>
+                    <td>@note.NoteId</td>
                     <td>@note.Title</td>
                     <td>@note.Message.Truncate(50)</td>
                     <td>
-                        <a href='/note/edit/@note.Id' class="btn btn-outline-dark" role="button">
-                            Edit
-                        </a>
-                        <a href='/note/delete/@note.Id' class="btn btn-outline-danger" role="button">
-                            Delete
-                        </a>
+                        <a href='/note/edit?noteId=@note.NoteId' class="btn btn-outline-dark" role="button">Edit</a>
+                        <a href='/note/delete?noteId=@note.NoteId' class="btn btn-outline-danger" role="button">Delete</a>
                     </td>
                 </tr>
             }
@@ -95,9 +91,9 @@ else
         }
     }
 
-    protected void DeleteConfirm(int noteID)
+    protected void DeleteConfirm(string noteID)
     {
-        note = noteList.FirstOrDefault(x => x.Id == noteID);
+        note = noteList.FirstOrDefault(x => x.NoteId == noteID);
     }
 
     public void ResetSearch()
