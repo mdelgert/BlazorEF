@@ -45,15 +45,17 @@ PM> Install-Package RandomDataGenerator.Net
 PM> Install-Package Microsoft.EntityFrameworkCore.Tools
 ```
 
-# Database Setup
-```console
-PM> 
-```
-
 # Links
+[Paging and Sorting using ASP .Net Core Razor Page, Web API, and Entity Framework](https://dotnetlead.com/net/paging-and-sorting-using-asp-net-core-razor-page-web-api-and-entity-framework/2267/)
+
 [Add sorting, filtering, and paging - ASP.NET MVC with EF Core](https://learn.microsoft.com/en-us/aspnet/core/data/ef-mvc/sort-filter-page?view=aspnetcore-6.0)
 
 [Paging and Sorting using ASP .NET Core Razor Page, Web API, and Entity Framework](https://www.codeproject.com/Articles/5292061/Paging-and-Sorting-using-ASP-NET-Core-Razor-Page-W)
 
 [Paging and Sorting](https://github.com/kendallchen/PagingSorting)
 
+[Getting Started With Entity Framework Core - Console](https://www.learnentityframeworkcore.com/walkthroughs/console-application)
+
+[How to build a .NET Core 3.1 Console Application with built-in Dependency Injection, Configuration and Logging](https://www.linkedin.com/pulse/how-build-net-core-31-console-application-built-in-injection-antu%C3%B1a/)
+
+[Creating a console app with Dependency Injection in .NET Core](https://siderite.dev/blog/creating-console-app-with-dependency-injection-in-/)
