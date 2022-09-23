@@ -50,23 +50,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Remove="Pages\NoteAdd.razor" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\BlazorEF.Shared\BlazorEF.Shared.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-      <UpToDateCheckInput Remove="Pages\NoteAdd.razor" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <_ContentIncludedByDefault Remove="Pages\NoteAdd.razor" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <None Include="Pages\NoteAdd.razor" />
-    </ItemGroup>
-
 </Project>

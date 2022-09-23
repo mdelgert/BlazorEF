@@ -3,6 +3,8 @@ using BlazorEF.Shared;
 using BlazorEF.Shared.Services;
 using Microsoft.AspNetCore.Components.WebView.Maui;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System.Reflection;
 
 namespace BlazorEF.App
 {
@@ -10,7 +12,11 @@ namespace BlazorEF.App
     {
         public static MauiApp CreateMauiApp()
         {
+            //https://montemagno.com/dotnet-maui-appsettings-json-configuration/
+            //https://github.com/shinyorg/configurationextensions?WT.mc_id=friends-0000-jamont
+
             var builder = MauiApp.CreateBuilder();
+
             builder
                 .UseMauiApp<App>()
                 .ConfigureFonts(fonts =>
