@@ -2,6 +2,7 @@
 using BlazorEF.Shared;
 using BlazorEF.Shared.Services;
 using Microsoft.AspNetCore.Components.WebView.Maui;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlazorEF.App
 {
@@ -21,7 +22,10 @@ namespace BlazorEF.App
 #if DEBUG
 		builder.Services.AddBlazorWebViewDeveloperTools();
 #endif
-            builder.Services.AddDbContext<DataContext>();
+            //builder.Services.AddDbContext<DataContext>();
+            //https://learn.microsoft.com/en-us/training/modules/store-local-data/2-compare-storage-options
+            var dbPath = Path.Combine(FileSystem.AppDataDirectory, "BlazorEF.db3");
+            builder.Services.AddDbContext<DataContext>(options => options.UseSqlite($"Filename={dbPath}"));
             builder.Services.AddSingleton<WeatherForecastService>();
             builder.Services.AddTransient<INoteService, NoteService>();
 

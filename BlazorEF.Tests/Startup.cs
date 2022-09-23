@@ -7,8 +7,8 @@ public class Startup
 {
     public static void ConfigureServices(IServiceCollection services, HostBuilderContext hostBuilderContext)
     {
-        var dataContext = new DataContext();
-        services.AddSingleton(_ => dataContext);
+        //var dataContext = new DataContext();
+        //services.AddSingleton(_ => dataContext);
         services.AddSingleton<INoteService, NoteService>();
         services.AddLogging(loggerBuilder =>
         {

@@ -1,26 +1,37 @@
 ﻿@page "/"
 @using BlazorEF.Shared.Services
 @inject INoteService NoteService
+@inject NavigationManager NavigationManager
 
 <h2>Generate Data</h2>
 
 <div class="form-group">
-    <input type="submit" value="Create" @onclick="(async () => await CreateFakes())" class="btn btn-primary"/>
-    <input type="submit" value="Delete" @onclick="(async () => await DeleteFakes())" class="btn btn-danger"/>
+    <input type="submit" value="Create" @onclick="async () => await CreateFakes()" class="btn btn-primary" />
+    <input type="submit" value="Delete" @onclick="async () => await DeleteFakes()" class="btn btn-danger" />
 </div>
 
+<p>
+    @result
+</p>
+
 @code {
+    private string? result;
+
     private async Task CreateFakes()
     {
-        await NoteService.CreateFakes((10));
+        await NoteService.CreateFakes(100);
+        result = "Create complete!";
+        NavigationManager.NavigateTo("/notelist");
     }
 
     private async Task DeleteFakes()
     {
+        result = "Delete begin!";
         var notes = await NoteService.ReadAll();
         foreach (var note in notes)
         {
             await NoteService.Delete(note.NoteId);
         }
+        result = "Delete complete!";
     }
 }
