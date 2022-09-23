@@ -59,3 +59,5 @@ PM> Install-Package Microsoft.EntityFrameworkCore.Tools
 [How to build a .NET Core 3.1 Console Application with built-in Dependency Injection, Configuration and Logging](https://www.linkedin.com/pulse/how-build-net-core-31-console-application-built-in-injection-antu%C3%B1a/)
 
 [Creating a console app with Dependency Injection in .NET Core](https://siderite.dev/blog/creating-console-app-with-dependency-injection-in-/)
+
+[Startup.cs in a self-hosted .NET Core Console Application](https://stackoverflow.com/questions/41407221/startup-cs-in-a-self-hosted-net-core-console-application)
