@@ -1,4 +1,6 @@
 ﻿using BlazorEF.App.Data;
+using BlazorEF.Shared;
+using BlazorEF.Shared.Services;
 using Microsoft.AspNetCore.Components.WebView.Maui;
 
 namespace BlazorEF.App
@@ -19,8 +21,9 @@ namespace BlazorEF.App
 #if DEBUG
 		builder.Services.AddBlazorWebViewDeveloperTools();
 #endif
-
+            builder.Services.AddDbContext<DataContext>();
             builder.Services.AddSingleton<WeatherForecastService>();
+            builder.Services.AddTransient<INoteService, NoteService>();
 
             return builder.Build();
         }

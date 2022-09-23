@@ -1,7 +1,4 @@
-﻿using BlazorEF.Shared.Models;
-using BlazorEF.Shared.Services;
-using Bogus;
-using Bogus.DataSets;
+﻿using BlazorEF.Shared.Services;
 
 namespace BlazorEF.Tests.Services;
 
@@ -16,53 +13,26 @@ public class NoteServiceTests
         _testOutputHelper = testOutputHelper;
         _noteService = noteService;
     }
-
-    private async Task CreateNotes()
-    {
-        for (var i = 1; i <= BatchSize; i++)
-        {
-            var faker = new Faker();
-            var note = new NoteModel
-            {
-                Title = faker.Lorem.Word(),
-                Message = faker.Lorem.Paragraph()
-            };
-            await _noteService.Create(note);
-        }
-    }
     
     [Fact]
     public async Task CreateTest()
     {
-        await CreateNotes();
+        await _noteService.CreateFakes(BatchSize);
     }
 
     [Fact]
     public async Task FindById()
     {
-        var faker = new Faker();
-    
-        var newNote = new NoteModel
-        {
-            Title = faker.Lorem.Word(),
-            Message = faker.Lorem.Paragraph()
-        };
-    
-        var savedNote = await _noteService.Create(newNote);
-    
-        var note = await _noteService.FindById(savedNote.NoteId);
-    
+        var fakeNote = await _noteService.CreateFake();
+        var note = await _noteService.FindById(fakeNote.NoteId);
         Assert.NotNull(note);
-    
-        _testOutputHelper.WriteLine($"NoteId={savedNote.NoteId} title={note?.Title}");
-    
+        _testOutputHelper.WriteLine($"NoteId={fakeNote.NoteId} title={fakeNote.Title}");
     }
     
     [Fact]
     public async Task ReadAllTest()
     {
-        await CreateNotes();
-    
+        await _noteService.CreateFakes(BatchSize);
         var notes = await _noteService.ReadAll();
     
         foreach (var note in notes.Where(note => note != null))
@@ -74,7 +44,7 @@ public class NoteServiceTests
     [Fact]
     public async Task UpdateTest()
     {
-        await CreateNotes();
+        await _noteService.CreateFakes(BatchSize);
     
         var notes = await _noteService.ReadAll();
     
@@ -89,7 +59,7 @@ public class NoteServiceTests
     [Fact]
     public async Task DeleteAllTest()
     {
-        await CreateNotes();
+        await _noteService.CreateFakes(BatchSize);
     
         var notes = await _noteService.ReadAll();
     
@@ -100,5 +70,4 @@ public class NoteServiceTests
             _testOutputHelper.WriteLine($"Deleting NoteId={note.NoteId}");
         }
     }
-    
 }

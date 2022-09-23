@@ -1,7 +1,26 @@
 ﻿@page "/"
+@using BlazorEF.Shared.Services
+@inject INoteService NoteService
 
-<h1>Hello, world!</h1>
+<h2>Generate Data</h2>
 
-Welcome to your new app.
+<div class="form-group">
+    <input type="submit" value="Create" @onclick="(async () => await CreateFakes())" class="btn btn-primary"/>
+    <input type="submit" value="Delete" @onclick="(async () => await DeleteFakes())" class="btn btn-danger"/>
+</div>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+@code {
+    private async Task CreateFakes()
+    {
+        await NoteService.CreateFakes((10));
+    }
+
+    private async Task DeleteFakes()
+    {
+        var notes = await NoteService.ReadAll();
+        foreach (var note in notes)
+        {
+            await NoteService.Delete(note.NoteId);
+        }
+    }
+}

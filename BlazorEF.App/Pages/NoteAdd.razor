@@ -1,0 +1,71 @@
+﻿@page "/note/add"
+@page "/note/edit"
+@using BlazorEF.Shared
+@using BlazorEF.Shared.Services
+@using BlazorEF.Shared.Models
+@inject INoteService NoteService
+@inject NavigationManager NavigationManager
+
+<h1>@Title Note</h1>
+<hr/>
+
+<EditForm Model="@_note" OnValidSubmit="SaveNote">
+    <DataAnnotationsValidator/>
+    <div class="mb-3">
+        <label for="Title" class="form-label">Title</label>
+        <div class="col-md-4" id="Title">
+            <InputText class="form-control" @bind-Value="_note.Title"/>
+        </div>
+        <ValidationMessage For="@(() => _note.Title)"/>
+    </div>
+    <div class="mb-3">
+        <label for="Message" class="form-label">Message</label>
+        <div class="col-md-4" id="Message">
+            <InputText class="form-control" @bind-Value="_note.Message"/>
+        </div>
+        <ValidationMessage For="@(() => _note.Message)"/>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a class="btn btn-light" href="/notelist">Cancel</a>
+    </div>
+</EditForm>
+
+@code {
+    string _noteId;
+    private NoteModel _note = new();
+        private const string Title = "Add";
+
+    protected override Task OnInitializedAsync()
+    {
+        NavigationManager.TryGetQueryString<string>("noteId", out _noteId);
+        return Task.CompletedTask;
+    }
+    
+    protected override async Task OnParametersSetAsync()
+    {
+        if (_noteId != null)
+        {
+            _note = await NoteService.FindById(_noteId);
+        }
+    }
+
+    private async Task SaveNote()
+    {
+        if (_note.NoteId == null)
+        {
+            await NoteService.Create(_note);
+        }
+        else
+        {
+            await NoteService.Update(_note);
+        }
+
+        Cancel();
+    }
+
+    private void Cancel()
+    {
+        NavigationManager.NavigateTo("/notelist");
+    }
+}

@@ -1,10 +1,14 @@
-﻿using BlazorEF.Shared.Models;
+﻿using Bogus;
+using Bogus.DataSets;
+using BlazorEF.Shared.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlazorEF.Shared.Services;
 
 public interface INoteService
 {
+    Task CreateFakes(int batchSize);
+    Task<NoteModel> CreateFake();
     Task<NoteModel> Create(NoteModel note);
     Task<NoteModel> FindById(string id);
     Task<List<NoteModel>> ReadAll();
@@ -21,6 +25,26 @@ public class NoteService : INoteService
         _dbContext = dbContext;
     }
 
+    public async Task CreateFakes(int batchSize)
+    {
+        for (var i = 1; i <= batchSize; i++)
+        {
+            await CreateFake();
+        }
+    }
+
+    public async Task<NoteModel> CreateFake()
+    {
+        var faker = new Faker();
+        var noteModel = new NoteModel
+        {
+            Title = faker.Lorem.Word(),
+            Message = faker.Lorem.Paragraph()
+        };
+        var note = await Create(noteModel);
+        return note;
+    }
+    
     public async Task<NoteModel> Create(NoteModel note)
     {
         note.NoteId = Guid.NewGuid().ToString();

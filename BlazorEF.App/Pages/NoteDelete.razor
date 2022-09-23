@@ -1,0 +1,51 @@
+﻿@page "/note/delete"
+@using BlazorEF.Shared
+@using BlazorEF.Shared.Services
+@using BlazorEF.Shared.Models
+@inject INoteService NoteService
+@inject NavigationManager NavigationManager
+
+<h2>Delete Note</h2>
+<br />
+
+<div class="form-group">
+    <h4>Do you want to delete this note?</h4>
+    <table class="table">
+        <tbody>
+        <tr>
+            <td>Title</td>
+            <td>@_note.Title</td>
+        </tr>
+        <tr>
+            <td>Message</td>
+            <td>@_note.Message</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="form-group">
+    <input type="submit" value="Delete" @onclick="(async () => await RemoveNote(_note.NoteId))" class="btn btn-danger" />
+    <input type="submit" value="Cancel" @onclick="(Cancel)" class="btn btn-warning" />
+</div>
+
+@code {
+    string _noteId;
+    NoteModel _note = new NoteModel();
+    
+    protected override async Task OnInitializedAsync()
+    {
+        NavigationManager.TryGetQueryString<string>("noteId", out _noteId);
+        _note = await NoteService.FindById(_noteId);
+    }
+
+    private async Task RemoveNote(string noteId)
+    {
+        await NoteService.Delete(noteId);
+        NavigationManager.NavigateTo("/notelist");
+    }
+
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("/notelist");
+    }
+}
