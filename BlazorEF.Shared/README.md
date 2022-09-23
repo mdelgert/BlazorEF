@@ -39,3 +39,21 @@ PM> Install-Package Bogus
 ```console
 PM> Install-Package RandomDataGenerator.Net
 ```
+
+[Entity Framework Core tools reference - Package Manager Console in Visual Studio](https://learn.microsoft.com/en-us/ef/core/cli/powershell)
+```console
+PM> Install-Package Microsoft.EntityFrameworkCore.Tools
+```
+
+# Database Setup
+```console
+PM> 
+```
+
+# Links
+[Add sorting, filtering, and paging - ASP.NET MVC with EF Core](https://learn.microsoft.com/en-us/aspnet/core/data/ef-mvc/sort-filter-page?view=aspnetcore-6.0)
+
+[Paging and Sorting using ASP .NET Core Razor Page, Web API, and Entity Framework](https://www.codeproject.com/Articles/5292061/Paging-and-Sorting-using-ASP-NET-Core-Razor-Page-W)
+
+[Paging and Sorting](https://github.com/kendallchen/PagingSorting)
+
