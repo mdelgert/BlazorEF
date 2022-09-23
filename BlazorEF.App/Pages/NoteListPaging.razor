@@ -1,0 +1,137 @@
+﻿@page "/notelistpaging"
+@page "/notelistpaging/{Page:int}"
+@using BlazorEF.Shared.Services
+@using BlazorEF.Shared.Models
+@using BlazorEF.Shared
+@inject INoteService NoteService
+
+@*<h2>Notes</h2>*@
+
+<div class="col-md-12">
+
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Grid</h5>
+        </div>
+        <div class="card-body">
+
+            <div class="form-row">
+                @*<div class="form-group col-md-4">
+                    <input @bind-value="Search"
+                           class="form-control" type="text" placeholder="Filter...">
+                </div>
+                <div class="form-group col-md-4">
+                    <button class="btn btn-success" @onclick="SearchClick">Search</button>
+                    <button class="btn btn-danger" @onclick="ClearClick">Clear</button>
+                </div>*@
+                @*<div class="col-md-6">
+                    <a href='/note/add' class="btn btn-primary" role="button">
+                        <i class="fas fa-user-plus"></i>
+                        Add Note
+                    </a>
+                </div>*@
+                <div class="input-group col">
+                    <input type="text" class="form-control" placeholder="Search title"
+                           @bind="Search" @bind:event="oninput" @onkeyup="SearchClick" />
+                    @*@if (Search.Length > 0)
+                    {
+                        <div class="input-group-append">
+                            <button class="btn btn-danger" @onclick="ClearClick">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    }*@
+                </div>
+            </div>
+            <div class="row">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Message</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var note in Data)
+                        {
+                            <tr @key="note.NoteId">
+                                <td>@note.Title</td>
+                                <td>@note.Message.Truncate(50)</td>
+                                <td><a class="btn btn-warning" href="/note/edit?noteId=@note.NoteId">Edit</a></td>
+                                <td><a class="btn btn-danger" href="/note/delete?noteId=@note.NoteId">Delete</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                    @for (var i = 1; i <= TotalPages; i++)
+                    {
+                        <li class="page-item @(i == CurrentPage ? "active" : "")">
+                            <a href="/notelistpaging/@i" class="page-link">@i</a>
+                        </li>
+                    }
+                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@code {
+    
+    //https://getbootstrap.com/docs/5.2/components/pagination/
+    
+    [Parameter] public int Page { get; set; } = 1;
+    public int CurrentPage { get; set; } = 1;
+    public int Count { get; set; }
+    public int PageSize { get; set; } = 5;
+    public int TotalPages => (int)Math.Ceiling(decimal.Divide(Count, PageSize));
+    public List<NoteModel> Data { get; set; }
+    public string Search { get; set; }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        Page = 1;
+        await BindGrid();
+    }
+
+    protected override async void OnParametersSet()
+    {
+        await BindGrid();
+    }
+    
+    private async Task BindGrid()
+    {
+        var result = await NoteService.ShowAllNotes(Search, Page == 0 ? 1 : Page, PageSize);
+        Count = await NoteService.GetCount(Search);
+        Data = result;
+        CurrentPage = Page;
+    }
+
+    private async Task SearchClick()
+    {
+        if (!string.IsNullOrEmpty(Search))
+        {
+            Page = 1;
+            var result = await NoteService.ShowAllNotes(Search, Page == 0 ? 1 : Page, PageSize);
+            Count = await NoteService.GetCount(Search);
+            Data = result;
+            CurrentPage = Page;
+        }
+    }
+
+    private async Task ClearClick()
+    {
+        Search = string.Empty;
+        Page = 1;
+        var result = await NoteService.ShowAllNotes(Search, Page == 0 ? 1 : Page, PageSize);
+        Count = await NoteService.GetCount(Search);
+        Data = result;
+        CurrentPage = Page;
+    }
+}

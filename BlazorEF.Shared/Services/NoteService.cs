@@ -7,6 +7,8 @@ namespace BlazorEF.Shared.Services;
 
 public interface INoteService
 {
+    Task<List<NoteModel>> ShowAllNotes(string search, int pageNumber, int pageSize);
+    Task<int> GetCount(string search);
     Task CreateFakes(int batchSize);
     Task<NoteModel> CreateFake();
     Task<NoteModel> Create(NoteModel note);
@@ -23,6 +25,40 @@ public class NoteService : INoteService
     public NoteService(DataContext dbContext)
     {
         _dbContext = dbContext;
+    }
+
+    public Task<List<NoteModel>> ShowAllNotes(string search, int pageNumber, int pageSize)
+    {
+        var queryable = (from notes in _dbContext.Notes.AsNoTracking()
+                orderby notes.NoteId descending
+                select notes
+            ).AsQueryable();
+        
+        if (!string.IsNullOrEmpty(search))
+        {
+            queryable = queryable.Where(m => m.Title != null && m.Title.Contains(search));
+        }
+
+        var result = queryable.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
+        
+        return Task.FromResult(result);
+    }
+    
+    public Task<int> GetCount(string search)
+    {
+        var queryable = (from notes in _dbContext.Notes.AsNoTracking()
+
+                orderby notes.NoteId descending
+                select notes
+            ).AsQueryable();
+
+
+        if (!string.IsNullOrEmpty(search))
+        {
+            queryable = queryable.Where(m => m.Title != null && m.Title.Contains(search));
+        }
+
+        return Task.FromResult(queryable.Count());
     }
 
     public async Task CreateFakes(int batchSize)

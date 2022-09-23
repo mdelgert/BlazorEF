@@ -13,6 +13,13 @@ public class NoteServiceTests
         _testOutputHelper = testOutputHelper;
         _noteService = noteService;
     }
+
+    [Fact]
+    public async Task GetCount()
+    {
+        var count = await _noteService.GetCount("et");
+        _testOutputHelper.WriteLine(count.ToString());
+    }
     
     [Fact]
     public async Task CreateTest()
