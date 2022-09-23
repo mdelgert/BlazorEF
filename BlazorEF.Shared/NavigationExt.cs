@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.WebUtilities;
 
-namespace BlazorEF.Server;
+namespace BlazorEF.Shared;
 
-public static class NavigationManagerExtensions
+public static class NavigationExt
 {
     public static bool TryGetQueryString<T>(this NavigationManager navManager, string key, out T value)
     {

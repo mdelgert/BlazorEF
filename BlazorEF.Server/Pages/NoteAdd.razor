@@ -1,5 +1,6 @@
 ﻿@page "/note/add"
 @page "/note/edit"
+@using BlazorEF.Shared
 @using BlazorEF.Shared.Services
 @using BlazorEF.Shared.Models
 @inject INoteService NoteService
@@ -51,14 +52,15 @@
 
     private async Task SaveNote()
     {
-         if (_note != null && _note.NoteId != null)
-         {
-             await NoteService.Update(_note);
-         }
-         else
-         {
-             if (_note != null) await NoteService.Create(_note);
-         }
+        if (_note.NoteId == null)
+        {
+            await NoteService.Create(_note);
+        }
+        else
+        {
+            await NoteService.Update(_note);
+        }
+
         Cancel();
     }
 
