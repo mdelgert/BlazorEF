@@ -9,7 +9,9 @@ public static class Startup
         var builder = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json", optional: true, reloadOnChange: false);
+
         IConfiguration configuration = builder.Build();
+        
         services.AddSingleton(configuration);
 
         Log.Logger = new LoggerConfiguration()
