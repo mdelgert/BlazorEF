@@ -61,3 +61,5 @@ PM> Install-Package Microsoft.EntityFrameworkCore.Tools
 [Creating a console app with Dependency Injection in .NET Core](https://siderite.dev/blog/creating-console-app-with-dependency-injection-in-/)
 
 [Startup.cs in a self-hosted .NET Core Console Application](https://stackoverflow.com/questions/41407221/startup-cs-in-a-self-hosted-net-core-console-application)
+
+[KendoNET.DynamicLinq](https://github.com/linmasaki/KendoNET.DynamicLinq)
