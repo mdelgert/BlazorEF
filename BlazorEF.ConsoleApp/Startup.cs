@@ -28,8 +28,8 @@ public static class Startup
             builder.AddSerilog();
         });
 
-        //services.AddSingleton<IQuadraticService, QuadraticService>();
-        //services.AddSingleton<EntryPoint>();
+        //services.AddSingleton<IExample, Example>();
+        services.AddSingleton<EntryPoint>();
 
         return services;
     }

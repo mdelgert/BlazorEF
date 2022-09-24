@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "BlazorEF.ConsoleApp2": {
-      "commandName": "Project",
-      "commandLineArgs": "a b c"
-    }
-  }
-}

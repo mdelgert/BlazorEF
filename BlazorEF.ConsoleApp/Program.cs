@@ -1,2 +1,7 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using BlazorEF.ConsoleApp;
+using Microsoft.Extensions.DependencyInjection;
+
+var services = Startup.ConfigureServices();
+var serviceProvider = services.BuildServiceProvider();
+
+serviceProvider.GetService<EntryPoint>().Run(args);
