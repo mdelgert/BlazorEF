@@ -1,9 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Serilog;
-
-namespace BlazorEF.ConsoleApp;
+﻿namespace BlazorEF.ConsoleApp;
 
 public static class Startup
 {
