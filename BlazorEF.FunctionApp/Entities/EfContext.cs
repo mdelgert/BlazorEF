@@ -16,7 +16,6 @@ public class EfContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=BlazorEfFunction;Integrated Security=False;" +
-            "Persist Security Info=False;User ID=sa;Password=Password2022;");
+        optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=BlazorEfFunction;Integrated Security=False;Persist Security Info=False;User ID=sa;Password=Password2022;");
     }
 }

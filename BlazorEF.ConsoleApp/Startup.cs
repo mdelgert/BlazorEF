@@ -1,4 +1,8 @@
-﻿namespace BlazorEF.ConsoleApp;
+﻿using BlazorEF.Shared;
+using BlazorEF.Shared.Services;
+using Microsoft.EntityFrameworkCore;
+
+namespace BlazorEF.ConsoleApp;
 
 public static class Startup
 {
@@ -25,9 +29,11 @@ public static class Startup
             builder.AddSerilog();
         });
 
-        //services.AddSingleton<IExample, Example>();
+        services.AddDbContext<DataContext>(options => options.UseSqlServer("Data Source=localhost;Initial Catalog=BlazorEfConsole;" +
+            "Integrated Security=False;Persist Security Info=False;User ID=sa;Password=Password2022;"));
+        services.AddSingleton<INoteService, NoteService>();
         services.AddSingleton<EntryPoint>();
-
+        
         return services;
     }
 }

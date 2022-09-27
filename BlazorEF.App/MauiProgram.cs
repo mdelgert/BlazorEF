@@ -30,8 +30,13 @@ namespace BlazorEF.App
 #endif
             //builder.Services.AddDbContext<DataContext>();
             //https://learn.microsoft.com/en-us/training/modules/store-local-data/2-compare-storage-options
-            var dbPath = Path.Combine(FileSystem.AppDataDirectory, "BlazorEF.db3");
-            builder.Services.AddDbContext<DataContext>(options => options.UseSqlite($"Filename={dbPath}"));
+
+            //var dbPath = Path.Combine(FileSystem.AppDataDirectory, "BlazorEF.db3");
+            //builder.Services.AddDbContext<DataContext>(options => options.UseSqlite($"Filename={dbPath}"));
+
+            builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer("Data Source=localhost;Initial Catalog=BlazorEfApp;" +
+            "Integrated Security=False;Persist Security Info=False;User ID=sa;Password=Password2022;"));
+
             builder.Services.AddSingleton<WeatherForecastService>();
             builder.Services.AddTransient<INoteService, NoteService>();
 
