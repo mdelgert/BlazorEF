@@ -18,7 +18,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorEF.Shared", "BlazorEF
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorEF.Tests", "BlazorEF.Tests\BlazorEF.Tests.csproj", "{31AE4A31-1C40-4BDE-B632-19864A8224BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorEF.ConsoleApp", "BlazorEF.ConsoleApp\BlazorEF.ConsoleApp.csproj", "{36433881-65D4-49B8-8C34-1C673AF202E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorEF.ConsoleApp", "BlazorEF.ConsoleApp\BlazorEF.ConsoleApp.csproj", "{36433881-65D4-49B8-8C34-1C673AF202E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorEF.FunctionApp", "BlazorEF.FunctionApp\BlazorEF.FunctionApp.csproj", "{9153282C-EE54-40E5-AEAC-D3BA1CD2D9FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +50,10 @@ Global
 		{36433881-65D4-49B8-8C34-1C673AF202E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36433881-65D4-49B8-8C34-1C673AF202E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36433881-65D4-49B8-8C34-1C673AF202E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9153282C-EE54-40E5-AEAC-D3BA1CD2D9FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9153282C-EE54-40E5-AEAC-D3BA1CD2D9FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9153282C-EE54-40E5-AEAC-D3BA1CD2D9FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9153282C-EE54-40E5-AEAC-D3BA1CD2D9FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
