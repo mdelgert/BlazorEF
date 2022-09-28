@@ -8,4 +8,6 @@ public class NoteModel
     public string NoteId { get; set; }
     public string? Title { get; set; }
     public string? Message { get; set; }
+    public DateTime CreateDate { get; set; }
+    public DateTime UpdatedDate { get; set; }
 }

@@ -13,10 +13,11 @@ public class DataContext: DbContext
         Database.EnsureCreated();
     }
     
-    protected override void OnModelCreating(ModelBuilder builder)
-    {
-        builder.Entity<NoteModel>().ToContainer("Notes");
-    }
+    //protected override void OnModelCreating(ModelBuilder builder)
+    //{
+    //    builder.Entity<NoteModel>().ToContainer("Notes");
+    //}
+
 }
 
 // public DataContext()

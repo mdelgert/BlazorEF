@@ -84,6 +84,8 @@ public class NoteService : INoteService
     public async Task<NoteModel> Create(NoteModel note)
     {
         note.NoteId = Guid.NewGuid().ToString();
+        note.CreateDate = DateTime.UtcNow;
+        note.UpdatedDate = DateTime.UtcNow;
         var id = _dbContext.Notes.Add(note);
         await _dbContext.SaveChangesAsync();
         return note;
@@ -103,6 +105,7 @@ public class NoteService : INoteService
 
     public async Task<NoteModel> Update(NoteModel note)
     {
+        note.UpdatedDate = DateTime.UtcNow;
         _dbContext.Entry(note).State = EntityState.Modified;
         await _dbContext.SaveChangesAsync();
         return note;

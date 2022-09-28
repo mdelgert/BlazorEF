@@ -37,7 +37,7 @@ PM> Remove-Migration
 ```
 
 ```console
-PM>
+PM> Update-Database
 ```
 
 # Migrations Core CLI
@@ -54,10 +54,27 @@ PS> dotnet ef migrations remove
 ```
 
 ```console
-PS>
+PS> dotnet ef database update
+```
+
+```console
+PS> dotnet ef migrations add AddWeatherForecast
+```
+
+```console
+PS> dotnet ef database update
+```
+
+```console
+PS> dotnet ef migrations add UpdateNotes
+```
+
+```console
+PS> dotnet ef database update
 ```
 
 # Reference
+[Applying Migrations](https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/applying?tabs=vs)
 [Entity Framework Core tools reference - Package Manager Console in Visual Studio](https://learn.microsoft.com/en-us/ef/core/cli/powershell)
 [Entity Framework Core tools reference](https://learn.microsoft.com/en-us/ef/core/cli/)
 [Migrations Overview](https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli)
