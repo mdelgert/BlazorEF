@@ -12,11 +12,11 @@ public class DataContext: DbContext
         //Database.EnsureDeleted();
         Database.EnsureCreated();
     }
-    
-    //protected override void OnModelCreating(ModelBuilder builder)
-    //{
-    //    builder.Entity<NoteModel>().ToContainer("Notes");
-    //}
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        builder.Entity<NoteModel>().ToContainer("Notes");
+    }
 
 }
 
