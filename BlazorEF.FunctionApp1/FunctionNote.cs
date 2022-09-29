@@ -48,8 +48,8 @@ namespace BlazorEF.FunctionApp1
                 UpdatedDate = DateTime.UtcNow
             };
 
-
             _efContext.Notes.Add(note);
+
             await _efContext.SaveChangesAsync();
 
             //using (var db = new EfContext())

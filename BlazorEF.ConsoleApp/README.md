@@ -30,6 +30,52 @@ PM> Install-Package Serilog.Settings.Configuration
 PM> Install-Package Serilog.Sinks.File
 ```
 
+# Migrations PM
+```console
+PM> Add-Migration InitialCreate -Verbose
+```
+
+```console
+PM> Remove-Migration
+```
+
+```console
+PM> Update-Database
+```
+
+# Migrations Core CLI
+```console
+PS> cd .\BlazorEF.FunctionApp\
+```
+
+```console
+PS> dotnet ef migrations add InitialCreate
+```
+
+```console
+PS> dotnet ef migrations remove
+```
+
+```console
+PS> dotnet ef database update
+```
+
+```console
+PS> dotnet ef migrations add AddWeatherForecast
+```
+
+```console
+PS> dotnet ef database update
+```
+
+```console
+PS> dotnet ef migrations add UpdateNotes
+```
+
+```console
+PS> dotnet ef database update
+```
+
 # Links
 [Console arguments](https://stackoverflow.com/questions/6151036/console-app-arguments-how-arguments-are-passed-to-main-method)
 [Main() and command-line arguments](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/program-structure/main-command-line)

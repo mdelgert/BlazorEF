@@ -1,0 +1,5 @@
+{
+  "Settings": {
+    "ConnectionString": "Data Source=localhost;Initial Catalog=BlazorEfTests;Integrated Security=False;Persist Security Info=False;User ID=sa;Password=Password2022;"
+  }
+}

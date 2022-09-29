@@ -6,7 +6,7 @@ namespace BlazorEF.Shared;
 public class DataContext: DbContext
 {
     public DbSet<NoteModel> Notes { get; set; }
-
+    
     public DataContext(DbContextOptions<DataContext> options) : base(options)
     {
         //Database.EnsureDeleted();

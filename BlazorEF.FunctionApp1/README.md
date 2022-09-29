@@ -27,29 +27,12 @@ PM> Install-Package Microsoft.EntityFrameworkCore.Tools
 ```
 
 ```console
-PM> Update-Package Microsoft.EntityFrameworkCore.Tools
-```
-
-```console
 PM> Get-Help about_EntityFrameworkCore
-```
-
-# Migrations PM
-```console
-PM> Add-Migration InitialCreate -Verbose
-```
-
-```console
-PM> Remove-Migration
-```
-
-```console
-PM> Update-Database
 ```
 
 # Migrations Core CLI
 ```console
-PS> cd .\BlazorEF.FunctionApp\
+PS> cd .\BlazorEF.FunctionApp1
 ```
 
 ```console
@@ -57,30 +40,17 @@ PS> dotnet ef migrations add InitialCreate
 ```
 
 ```console
-PS> dotnet ef migrations remove
+PS> dotnet ef database update --verbose --project BlazorEF.FunctionApp1.Entities   --startup-project BlazorEF.FunctionApp1
 ```
 
-```console
-PS> dotnet ef database update
-```
+
 
 ```console
-PS> dotnet ef migrations add AddWeatherForecast
-```
-
-```console
-PS> dotnet ef database update
-```
-
-```console
-PS> dotnet ef migrations add UpdateNotes
-```
-
-```console
-PS> dotnet ef database update
+PS>
 ```
 
 # Reference
+[unable-to-resolve-service-for-type](https://stackoverflow.com/questions/70273434/unable-to-resolve-service-for-type-%C2%A8microsoft-entityframeworkcore-dbcontextopti)
 [Applying Migrations](https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/applying?tabs=vs)
 [Entity Framework Core tools reference - Package Manager Console in Visual Studio](https://learn.microsoft.com/en-us/ef/core/cli/powershell)
 [Entity Framework Core tools reference](https://learn.microsoft.com/en-us/ef/core/cli/)
